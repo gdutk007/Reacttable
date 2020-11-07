@@ -1,5 +1,5 @@
 import React from 'react'
-
+import '../../App.css';
 
 function pleasework(element, category){
     return element.category === category
@@ -17,20 +17,18 @@ const Category = (props) => {
     console.log(items)
     let itemList = items.map((item) =>{ 
         return (
-            
-            <div>
-                <label>
-                    <p>{item.name}: {item.price} </p>
-                </label>
-            </div>
+                <div >
+                    <td className="tablecss" >{item.name} </td>
+                    <td>{item.price} </td>
+                </div>
         );
       })
     return(
         <div>
-            <h1>{propcategory}</h1>
-            <ul>
+            <tr className="tablecss" >
+                <h2>{propcategory}</h2>
                 {itemList}
-            </ul>
+            </tr>
         </div>
     );
 

@@ -1,5 +1,6 @@
 import react from 'react'
 import Category from '../category/category'
+import '../../App.css';
 
 const Table = (props) => {
 
@@ -25,7 +26,9 @@ const Table = (props) => {
     return( 
         <div>
             The table should go here...
+            <tbody className="tablecss">
             {tableList}
+            </tbody>
         </div>
     );
 }

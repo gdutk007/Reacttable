@@ -20,21 +20,48 @@ class App extends Component {
   }
 
 
+  HandleChange = (e) =>{
+    this.setState({ PlaceHolder: e.target.value })
+  }
+
+  createTable = (category)=>{
+    // create a table... call .map on this function
+    // to return a complete table
+  }
+
   render(){
+
+    let categories = this.state.productList.map( (element)=>{
+      return element.category
+    } );
+
+    categories = categories.filter((val,id,array) =>  {
+      return array.indexOf(val) === id
+    });
+    
+
+    console.log(table)
 
     return (
       <div className="App">
         Hello...
         <hr/>
-        <input type="text" value={this.state.PlaceHolder} />
+        <input type="text" value={this.state.PlaceHolder} onChange={this.HandleChange} />
         <br/>
         <label>
           This is a textbox 
           <input type="checkbox"/>  
         </label>
         <br/>
-        <br/>
-        <Table productList={this.state.table}  />
+
+
+
+
+
+        {/* <br/>
+        <table className="tablecss">
+          <Table productList={this.state.table}  />
+        </table> */}
       </div>
     );
   }
