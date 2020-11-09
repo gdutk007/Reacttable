@@ -1,5 +1,6 @@
 import React, {Component} from 'react'
 import Table from './components/table/Table'
+import Tabledata from './components/tabledata/Tabledata'
 import logo from './logo.svg';
 import './App.css';
 
@@ -7,7 +8,7 @@ class App extends Component {
 
 
   state = {
-    table: [
+    productList: [
       {category: "Sporting Goods", price: "$49.99", stocked: true, name: "Football"},
       {category: "Sporting Goods", price: "$9.99", stocked: true, name: "Baseball"},
       {category: "Sporting Goods", price: "$29.99", stocked: false, name: "Basketball"},
@@ -19,6 +20,9 @@ class App extends Component {
     PlaceHolder: '',
   }
 
+  HandleCheckBox = () => {
+    this.setState({display: !this.state.display})
+  }
 
   HandleChange = (e) =>{
     this.setState({ PlaceHolder: e.target.value })
@@ -27,6 +31,12 @@ class App extends Component {
   createTable = (category)=>{
     // create a table... call .map on this function
     // to return a complete table
+  }
+
+  RemoveItems = (category)=>{
+      return this.state.productList.filter((e)=>{
+        return category === e.category
+      })
   }
 
   render(){
@@ -39,8 +49,29 @@ class App extends Component {
       return array.indexOf(val) === id
     });
     
-
-    console.log(table)
+    let tableJSXList = categories.map((category)=>{
+      let items = this.RemoveItems(category);
+      return(
+        <Tabledata
+          key={category}
+          category={category}
+          items={items}
+        />
+      );
+    })
+    let table = null
+    if(this.state.display){
+      table = (
+        <table id="table">
+          <tbody>
+            {tableJSXList}
+          </tbody>
+        </table>
+      );
+  }else{
+    table = null
+  }
+    //console.log(table)
 
     return (
       <div className="App">
@@ -48,10 +79,11 @@ class App extends Component {
         <hr/>
         <input type="text" value={this.state.PlaceHolder} onChange={this.HandleChange} />
         <br/>
-        <label>
-          This is a textbox 
-          <input type="checkbox"/>  
+        <label> 
+          <input type="checkbox" onChange={this.HandleCheckBox}/>  
+          Check Box to hide data
         </label>
+        {table}
         <br/>
 
 
