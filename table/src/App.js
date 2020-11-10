@@ -1,7 +1,5 @@
 import React, {Component} from 'react'
-import Table from './components/table/Table'
 import Tabledata from './components/tabledata/Tabledata'
-import logo from './logo.svg';
 import './App.css';
 
 class App extends Component {
@@ -28,11 +26,6 @@ class App extends Component {
     this.setState({ PlaceHolder: e.target.value })
   }
 
-  createTable = (category)=>{
-    // create a table... call .map on this function
-    // to return a complete table
-  }
-
   RemoveItems = (category)=>{
       return this.state.productList.filter((e)=>{
         return category === e.category
@@ -40,15 +33,17 @@ class App extends Component {
   }
 
   render(){
-
+    // extract categories
     let categories = this.state.productList.map( (element)=>{
       return element.category
     } );
-
     categories = categories.filter((val,id,array) =>  {
       return array.indexOf(val) === id
     });
     
+    let testingthis = Object.keys(this.state.productList)
+    console.log( 'this is the array of keys' + testingthis)
+
     let tableJSXList = categories.map((category)=>{
       let items = this.RemoveItems(category);
       return(
